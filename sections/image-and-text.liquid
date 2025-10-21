@@ -1,5 +1,4 @@
 {% stylesheet %}
-
   .iat__wrapper {
     display: grid;
     grid-template-columns: 0.8fr 1fr;
@@ -34,19 +33,19 @@
     max-width: 500px;
   }
   .iat__content .iat__header {
-    background: black;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     font-family: "Helvetica Neue", sans-serif;
     font-size: 48px;
     font-weight: 500;
     line-height: 110%;
-    margin-bottom: 32px;
-  }
-  
-   .iat__content .iat__header:first-line {
+    margin: 0 0 32px 0;
     background: linear-gradient(90deg, #2a2662 0%, #8384bd 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .iat__content .iat__header > span {
+    background: #1a1740;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -61,17 +60,38 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     line-height: 150%;
-    margin-bottom: 32px;
+    margin: 0 0 16px 0;
   }
   .iat__content .iat__paragraph {
     color: #414141;
     font-family: "Product Sans", sans-serif;
     font-size: 16px;
     line-height: 140%;
-    margin-bottom: 16px;
+    margin: 0 0 32px 0;
   }
+  /* .iat__content .iat__paragraph:last-of-type {
+    margin: 0 0 32px 0;
+  } */
   .iat__content .iat__btn {
+    background: #282460;
+    color: white;
+    text-decoration: none;
+    padding: 8px 24px;
+    border-radius: 100px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: "Helvetica Neue", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    transition: opacity 0.2s ease;
+  }
 
+  .iat__content .iat__btn:hover {
+    opacity: 0.8;
   }
   
 {% endstylesheet %}
@@ -94,12 +114,14 @@
             {% when 'paragraph' %}
               <p class="iat__paragraph">{{ block.settings.text }}</p>
             {% when 'button' %}
-              <a href="{{ block.settings.url }}" class="iat__btn">
-                {{ block.settings.title }}
-                {% if block.settings.show_arrow %}
-                  &rarr;
-                {% endif %}
-              </a>
+              <div class="iat__btn-wrapper">
+                <a href="{{ block.settings.url }}" class="iat__btn">
+                  <span>{{ block.settings.title }}</span>
+                  {% if block.settings.show_arrow %}
+                    <span>&rarr;</span>
+                  {% endif %}
+                </a>
+              </div>
           {% endcase %}
         {% endfor %}
       </div>
