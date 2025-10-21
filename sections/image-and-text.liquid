@@ -1,3 +1,54 @@
+{% stylesheet %}
+  .iat__wrapper {
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
+    gap: 0em;
+  }
+
+  .iat__content .iat__header {
+    
+  }
+  .iat__content .iat__subheader {
+
+  }
+  .iat__content .iat__paragraph {
+
+  }
+  .iat__content .iat__btn {
+
+  }
+  
+{% endstylesheet %}
+
+<div class="container container-full">
+  <div class="iat__wrapper">
+    <div class="iat__image">
+      {% if section.settings.image %}
+        {{ section.settings.image | image_url: width: 1000 | image_tag: alt: section.settings.image.alt }}
+      {% endif %}
+    </div>
+    <div class="iat__content">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'heading' %}
+            <h2>{{ block.settings.title }}</h2>
+          {% when 'subheading' %}
+            <h3>{{ block.settings.title }}</h3>
+          {% when 'paragraph' %}
+            <p>{{ block.settings.text }}</p>
+          {% when 'button' %}
+            <a href="{{ block.settings.url }}" class="btn">
+              {{ block.settings.title }}
+              {% if block.settings.show_arrow %}
+                &rarr;
+              {% endif %}
+            </a>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
 {% schema %}
 {
   "name": "Image and Text",
