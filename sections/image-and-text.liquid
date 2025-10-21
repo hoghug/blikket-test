@@ -2,13 +2,23 @@
   .iat__wrapper {
     display: grid;
     grid-template-columns: 0.8fr 1fr;
-    gap: 0em;
   }
 
   .iat__wrapper > div {
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+
+  @media (max-width: 768px) {
+    .iat__wrapper {
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 32px;
+    }
+    .iat__wrapper {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* Image Col */
@@ -27,51 +37,73 @@
   /* Content Col*/
   .iat__content {
     align-items: center;
+    padding: 0 32px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .iat__content {
+      padding: 0 20px; 
+    }
   }
   
   .iat__content > div {
     max-width: 500px;
   }
   .iat__content .iat__header {
+    color: #282460;
     font-family: "Helvetica Neue", sans-serif;
-    font-size: 48px;
+    font-size: 30px;
     font-weight: 500;
     line-height: 110%;
     margin: 0 0 32px 0;
-    background: linear-gradient(90deg, #2a2662 0%, #8384bd 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    text-align: center;
+  }
+  
+  @media screen and (min-width: 769px) {
+    .iat__content .iat__header {
+      font-size: 48px;
+      background: linear-gradient(90deg, #2a2662 0%, #8384bd 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: left;
+    }
   }
 
-  .iat__content .iat__header > span {
-    background: #1a1740;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  @media screen and (min-width: 769px) {
+    .iat__content .iat__header > span {
+      background: #282460;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
   }
 
   .iat__content .iat__subheader {
     color: #282460;
     opacity: 0.4;
-    font-family: "Product Sans", sans-serif;
+    font-family: "Roboto Flex", sans-serif; /* can't get Product Sans font */
     font-size: 16px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
     line-height: 150%;
     margin: 0 0 16px 0;
+    text-align: center;
   }
+  @media screen and (min-width: 769px) {
+    .iat__content .iat__subheader {
+      text-align: left;
+    }
+  }
+
   .iat__content .iat__paragraph {
     color: #414141;
-    font-family: "Product Sans", sans-serif;
+    font-family: "Roboto Flex", sans-serif;
     font-size: 16px;
     line-height: 140%;
     margin: 0 0 32px 0;
   }
-  /* .iat__content .iat__paragraph:last-of-type {
-    margin: 0 0 32px 0;
-  } */
   .iat__content .iat__btn {
     background: #282460;
     color: white;
@@ -89,9 +121,13 @@
     font-size: 16px;
     transition: opacity 0.2s ease;
   }
-
   .iat__content .iat__btn:hover {
     opacity: 0.8;
+  }
+  @media screen and (max-width: 768px) {
+    .iat__content .iat__btn {
+      display: flex;
+    }
   }
   
 {% endstylesheet %}
@@ -118,7 +154,9 @@
                 <a href="{{ block.settings.url }}" class="iat__btn">
                   <span>{{ block.settings.title }}</span>
                   {% if block.settings.show_arrow %}
-                    <span>&rarr;</span>
+                    <svg class="iat__btn__arrow" xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+                      <path d="M4.07761 9.07604H13.7326L9.98261 5.32604L11.1609 4.14771L16.9226 9.90937L11.1609 15.671L9.98261 14.4927L13.7326 10.7427H4.07761V9.07604Z" fill="white"></path>
+                    </svg>
                   {% endif %}
                 </a>
               </div>
