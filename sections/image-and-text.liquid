@@ -1,18 +1,74 @@
 {% stylesheet %}
+
   .iat__wrapper {
     display: grid;
     grid-template-columns: 0.8fr 1fr;
     gap: 0em;
   }
 
-  .iat__content .iat__header {
-    
+  .iat__wrapper > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
-  .iat__content .iat__subheader {
 
+  /* Image Col */
+  .iat__wrapper > .iat__image {
+    align-items: flex-start;
+  }
+
+  .iat__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100vh;
+  }
+
+  /* Content Col*/
+  .iat__content {
+    align-items: center;
+  }
+  
+  .iat__content > div {
+    max-width: 500px;
+  }
+  .iat__content .iat__header {
+    background: black;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 48px;
+    font-weight: 500;
+    line-height: 110%;
+    margin-bottom: 32px;
+  }
+  
+   .iat__content .iat__header:first-line {
+    background: linear-gradient(90deg, #2a2662 0%, #8384bd 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .iat__content .iat__subheader {
+    color: #282460;
+    opacity: 0.4;
+    font-family: "Product Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 150%;
+    margin-bottom: 32px;
   }
   .iat__content .iat__paragraph {
-
+    color: #414141;
+    font-family: "Product Sans", sans-serif;
+    font-size: 16px;
+    line-height: 140%;
+    margin-bottom: 16px;
   }
   .iat__content .iat__btn {
 
@@ -28,23 +84,25 @@
       {% endif %}
     </div>
     <div class="iat__content">
-      {% for block in section.blocks %}
-        {% case block.type %}
-          {% when 'heading' %}
-            <h2>{{ block.settings.title }}</h2>
-          {% when 'subheading' %}
-            <h3>{{ block.settings.title }}</h3>
-          {% when 'paragraph' %}
-            <p>{{ block.settings.text }}</p>
-          {% when 'button' %}
-            <a href="{{ block.settings.url }}" class="btn">
-              {{ block.settings.title }}
-              {% if block.settings.show_arrow %}
-                &rarr;
-              {% endif %}
-            </a>
-        {% endcase %}
-      {% endfor %}
+      <div>
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'heading' %}
+              <h2 class="iat__header">{{ block.settings.title }}</h2>
+            {% when 'subheading' %}
+              <h4 class="iat__subheader">{{ block.settings.title }}</h4>
+            {% when 'paragraph' %}
+              <p class="iat__paragraph">{{ block.settings.text }}</p>
+            {% when 'button' %}
+              <a href="{{ block.settings.url }}" class="iat__btn">
+                {{ block.settings.title }}
+                {% if block.settings.show_arrow %}
+                  &rarr;
+                {% endif %}
+              </a>
+          {% endcase %}
+        {% endfor %}
+      </div>
     </div>
   </div>
 </div>
